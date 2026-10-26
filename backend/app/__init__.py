@@ -67,6 +67,21 @@ def create_app(config: Config = None) -> Flask:
     app.register_blueprint(video_bp)
     app.register_blueprint(detection_bp)
 
+    @app.route("/")
+    def index():
+        return jsonify({
+            "service": "AgreBot Backend",
+            "status": "online",
+            "message": "Backend is running. Access the frontend dashboard at http://localhost:3000",
+            "endpoints": {
+                "health": "/api/health",
+                "camera_status": "/api/camera/status",
+                "video_feed": "/api/video/feed",
+                "latest_detection": "/api/detections/latest",
+                "detection_history": "/api/detections"
+            }
+        })
+
     # ── Shutdown hook ──────────────────────────────────────────────────────
     import atexit
     atexit.register(lambda: app.pipeline_service.stop())
