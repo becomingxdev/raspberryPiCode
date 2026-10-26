@@ -63,8 +63,3 @@ Desktop.ini
 *.swp
 *.swo
 *~
-
-# PyTorch checkpoints (ignore scratch weights, but track production model)
-*.ckpt
-*.pth
-!backend/models/combined/combined_model.pth
